@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/soppingcart/static/js/main.ea9fbfea.js",
+    "index.html": "/soppingcart/index.html",
+    "main.ea9fbfea.js.map": "/soppingcart/static/js/main.ea9fbfea.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ea9fbfea.js"
+  ]
+}
