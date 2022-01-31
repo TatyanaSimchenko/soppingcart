@@ -6,7 +6,6 @@ import Cart from "./components/Cart/Cart";
 import { Drawer, Grid, LinearProgress, Badge, TextField } from "@material-ui/core";
 //Styles
 import { Wrapper, StyledButton } from "./App.styles";
-
 //Types
 export type CartItemType = {
   id: number;
@@ -23,6 +22,7 @@ const getProducts = async (): Promise<CartItemType[]> =>
 
 const App = () => {
   const [cartOpen, setCartOpen] = useState(false)
+  const [value, setValue] = useState('')
   const [cartItems, setCartItems] = useState([] as CartItemType[])
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
@@ -60,30 +60,37 @@ const App = () => {
 
   const removeItem = (id: number): void => {
     setCartItems(cartItems.filter(item => item.id !== id))
-   } 
-
+  }
 
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went wrong...</div>
 
+  const filteredData = data?.filter(item => {
+    return item.title.toLowerCase().includes(value.toLowerCase())
+  })
 
   return (
     <Wrapper>
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-      <Drawer anchor="right" open={cartOpen}
+      <TextField
+        margin="normal"
+        label="Search..."
+        variant="outlined"
+        onChange={(e) => setValue(e.target.value)} />
+      <Drawer anchor="left" open={cartOpen}
         onClose={() => setCartOpen(false)}>
         <Cart cartItems={cartItems}
           addToCart={handleAddToCart}
           removeFromCart={handleRemoveFromCart}
-          removeItem={removeItem} />
+          removeItem={removeItem}
+        />
       </Drawer>
       <StyledButton onClick={() => setCartOpen(true)}>
         <Badge badgeContent={getTotalItems(cartItems)} color="error">
-          ShopingCart
+          <i className="fas fa-cart-plus"></i>
         </Badge>
       </StyledButton>
       <Grid container spacing={3}>
-        {data?.map(item => (
+        {filteredData?.map(item => (
           <Grid item key={item.id} xs={12} sm={4}>
             <Item item={item} handleAddToCart={handleAddToCart} />
           </Grid>
