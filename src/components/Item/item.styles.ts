@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
     display: flex;
-    justifi-content: space-between;
+    justify-content: space-between;
     flex-direction: column;
     width: 90%;
     border: 1px solid lightblue;
@@ -30,6 +30,10 @@ button {
 
 .description {
     height: 110px;
+}
+
+.price {
+    padding-left: 15px;
 }
 
 img {

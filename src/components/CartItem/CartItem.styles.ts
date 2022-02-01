@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
 display: flex;
-justyfy-content: space-between;
+justify-content: space-between;
 font-family: Arial, Helvetica, sans-serif;
 border: 1px solid lightblue;
 padding-bottom: 20px;
